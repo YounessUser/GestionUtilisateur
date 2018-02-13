@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>User</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <th>Firstname</th>
+                    <td>{{ user.firstname }}</td>
+                </tr>
+                <tr>
+                    <th>Lastname</th>
+                    <td>{{ user.lastname }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>uusername</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Is Admin</th>
+                    <td>{{  user.roles[0]=='ROLE_ADMIN'?'YES':'NO' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ul class="ul-style">
+            <li>
+                <a class="btn btn-default" href="{{ path('user_index') }}">Back to the list</a>
+            </li>
+            <li>
+                <a class="btn btn-primary" href="{{ path('user_edit', { 'id': user.id }) }}">Edit</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+{% endblock %}

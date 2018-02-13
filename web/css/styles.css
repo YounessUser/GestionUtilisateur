@@ -1,0 +1,27 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+.ul-style{
+    list-style-type: none;
+}
+
+.ul-style > li{
+    display: inline-block
+}
+
+.login-container{
+    margin:150px auto;
+    padding: 20px;
+    width: 50%;
+    min-height: 300px;
+    border: solid #5eb5e0 1px;
+    border-radius: 5px;
+}
+
+.login-container .login-title{
+    text-align: center;
+    color: #5eb5e0;
+}
+

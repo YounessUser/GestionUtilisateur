@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>User edit</h1>
+
+        {{ form_start(edit_form) }}
+
+            {{ form_row(edit_form.email) }}
+            {{ form_row(edit_form.username) }}
+            {{ form_row(edit_form.firstname) }}
+            {{ form_row(edit_form.lastname) }}
+            <input type="submit" value="Edit" class="btn btn-success col-md-2 col-sm-6" />
+        {{ form_end(edit_form) }}
+        <br>
+        <br>
+        <ul class="ul-style">
+            <li>
+                <a class="btn btn-default" href="{{ path('user_index') }}">Back to the list</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
