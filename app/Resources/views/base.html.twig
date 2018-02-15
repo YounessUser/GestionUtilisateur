@@ -1,57 +1,92 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+<html lang="en">
 
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-            <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/font-awesome.min.css') }}">
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <title>Template</title>
 
-        <!-- Static navbar -->
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Gestion<span style="color: #5cb85c">Utilisateur</span></a>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/font-awesome.min.css') }}">
+    {% endblock %}
+</head>
+
+<body>
+
+    <div id="header-section">
+    <div class="header-navbar">
+        <div class="container">
+            <nav class="navbar navbar-light bg-faded">
+
+                <a class="navbar-brand" href="#">
+                    <img src="{{asset('img/logo.png')}}" height="57" width="67" alt="">
+                </a>
+                <ul class="nav justify-content-end collapse" id="demoUL">
+                    {% if is_granted('ROLE_USER')==false %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('fos_user_security_login') }}" style="color:#fff">LOG IN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('fos_user_registration_register') }}" style="color:#fff">SIGN UP</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('fos_user_security_logout') }}" style="color:#fff">LOG OUT</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <button class="navbar-toggler hidden-lg-up pull-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar1">
+                    ☰
+                </button>
+                <div class="collapse navbar-toggleable-md" id="collapsingNavbar1">
+                    <ul class="nav  collapse" id="demo">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_security_login') }}" style="color:#fff">LOG IN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_registration_register') }}" style="color:#fff">SIGN UP</a>
+                        </li>
+                        <li class="nav-item">
+
+                        </li>
+                    </ul>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{ path('homepage') }}">Home</a></li>
-
-                        {% if is_granted('ROLE_ADMIN') %}
-                          <li class=""><a href="{{ path('user_index') }}">List User</a></li>
-                        {% endif %}
-
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        {% if is_granted('ROLE_USER') %}
-                            <li><a href="{{ path('fos_user_security_logout') }}">LOG OUT</a></li>
-                        {% else %}
-                            <li><a href="{{ path('fos_user_security_login') }}">LOG IN</a></li>
-                        {% endif %}
-                    </ul>
-                </div><!--/.nav-collapse -->
+            </nav>
+            <div class="row">
+                <div class="header-content text-center offset-md-3 col-md-6 col-sm-12 col-xs-12 ">
+                    <h4 class="header-content-title-seconde"><i>Find your Favorite</i></h4>
+                    <h1 class="header-content-title ">RECIPES</h1>
+                    <a class="btn heder-btn" href="">GET STARTED</a>
+                    <p class="header-content-p">OR SEND US YOUR OWN RECIPES AND <u> GET REWARDED!</u></p>
+                </div>
             </div>
-        </nav>
+        </div>
+    </div>
+</div>
 
+<div id="content">
+    {% block body %}
 
-        {% block body %}{% endblock %}
-
-
-        {% block javascripts %}
-            <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-        {% endblock %}
-    </body>
+    {% endblock %}
+</div>
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-5 col-xs-12">
+                <p>©2014 Fudi. All Rights Reserved.</p>
+            </div>
+            <div class="offset-md-5 col-md-4 col-ms-6 col-xs-12">
+                DESIGN BY: <a style="font-weight:bold" href="WWW.BEKADES.COM">WWW.BEKADES.COM</a>
+            </div>
+        </div>
+    </div>
+</footer>
+    {% block javascripts %}
+        <script src="{{ asset('vendor/bootstrap/js/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+</body>
 
 </html>

@@ -2,7 +2,8 @@
 
 {% block body %}
     <div class="container">
-        <h1>Users list</h1>
+
+        <h1>User</h1>
 
         <table class="table">
             <thead>
@@ -28,13 +29,15 @@
                             <li >
                                 <a class="btn btn-info" href="{{ path('user_show', { 'id': user.id }) }}">show</a>
                             </li>
+                        {% if is_granted('ROLE_ADMIN')%}
                             <li >
                                 <a class="btn btn-default" href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
                             </li>
                             <li >
                                 <a class="btn btn-danger" href="{{ path('user_delete', { 'id': user.id }) }}">delete</a>
                             </li>
-                        </ul>
+                        {% endif %}
+                    </ul>
                     </td>
                 </tr>
             {% endfor %}
@@ -43,7 +46,10 @@
 
         <ul class="ul-style">
             <li>
+                {% if is_granted('ROLE_ADMIN')%}
+
                 <a class="btn btn-primary" href="{{ path('user_new') }}">Create a new user</a>
+                {% endif %}
             </li>
         </ul>
     </div>

@@ -22,7 +22,7 @@ class DefaultController extends Controller
     public function homeAction(Request $request){
 
 
-        $username=$request->getSession()->get('username');
+        $username=$request->server->get('USERNAME');
 
         $em = $this->getDoctrine()->getManager();
 
@@ -30,9 +30,19 @@ class DefaultController extends Controller
             'username'=>$username
         ]);
 
+
         return $this->render('default/index.html.twig',[
-            'user'=>$user
+            'user'=>$user[0]
         ]);
+
+    }
+    /**
+     * @Route("/index",name="index")
+     */
+    public function frontEndAction(Request $request){
+
+
+        return $this->render('index.html.twig');
 
     }
 

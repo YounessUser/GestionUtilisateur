@@ -2,7 +2,6 @@
 
 {% block body %}
     <div class="container">
-        <h1>User</h1>
 
         <table class="table">
             <tbody>
@@ -37,6 +36,7 @@
             <li>
                 <a class="btn btn-default" href="{{ path('user_index') }}">Back to the list</a>
             </li>
+            {% if is_granted('ROLE_ADMIN')%}
             <li>
                 <a class="btn btn-primary" href="{{ path('user_edit', { 'id': user.id }) }}">Edit</a>
             </li>
@@ -45,6 +45,7 @@
                     <input type="submit" value="Delete" class="btn btn-danger">
                 {{ form_end(delete_form) }}
             </li>
+            {% endif %}
         </ul>
     </div>
 {% endblock %}

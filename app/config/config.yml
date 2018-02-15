@@ -81,3 +81,11 @@ fos_user:
     registration:
         form:
             type: AppBundle\Form\RegistrationFormType
+
+
+easy_admin:
+    site_name: 'Gestion<i>Utilisateur</i>'
+    entities:
+        - AppBundle\Entity\User
+    design:
+        brand_color: '#1ABC9C'

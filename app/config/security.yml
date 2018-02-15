@@ -22,6 +22,8 @@ security:
             form_login:
                  provider: fos_userbundle
                  csrf_token_generator: security.csrf.token_manager
+                 always_use_default_target_path: false
+                 default_target_path: /user/
 
 
 
@@ -34,4 +36,5 @@ security:
             #form_login: ~
 
     access_control:
-            - { path: ^/user/, roles: ROLE_ADMIN }
+            - { path: ^/user/^, roles: ROLE_ADMIN, methods: [POST, PUT, DELETE] }
+            - { path: ^/admin, roles: ROLE_ADMIN }

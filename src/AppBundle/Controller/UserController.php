@@ -6,6 +6,7 @@ use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * User controller.
@@ -20,11 +21,19 @@ class UserController extends Controller
      * @Route("/", name="user_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction( AuthorizationCheckerInterface $authChecker)
     {
+
         $em = $this->getDoctrine()->getManager();
+        $users=[];
+        if (true === $authChecker->isGranted('ROLE_ADMIN')) {
 
         $users = $em->getRepository('AppBundle:User')->findAll();
+        }else{
+            $id = $this->getUser()->getId();
+            $users[] = $em->getRepository('AppBundle:User')->find($id);
+        }
+
 
         return $this->render('user/index.html.twig', array(
             'users' => $users,
